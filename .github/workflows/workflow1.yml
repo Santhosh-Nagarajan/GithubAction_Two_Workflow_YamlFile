@@ -1,19 +1,19 @@
-name: Workflow 1
+name: Checkov and Terraform
 
 on:
   push:
     branches:
-      - main
+      - master
+
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Docker Version
-        run: docker --version
-
-      # Your workflow steps here
+      - name: Set up Python 3.8
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.8
