@@ -7,7 +7,7 @@ name: Workfow File Two
 
 on:
   workflow_run:
-    workflows: ["Workflow 1"]
+    workflows: ["Workflow1"]
     types:
       - completed
 
