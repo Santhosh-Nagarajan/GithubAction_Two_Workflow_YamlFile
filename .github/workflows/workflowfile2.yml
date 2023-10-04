@@ -16,3 +16,5 @@ jobs:
       - name: Run Linting
         run: |
           echo "workflow 2 successfully"
+          touch san.txt
+          ls
