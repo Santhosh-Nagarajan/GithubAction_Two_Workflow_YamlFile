@@ -13,6 +13,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Run Linting
+      - name: Workflow 2
         run: |
-          # Your linting commands here
+          echo "Workflow 2 Successfullt"
