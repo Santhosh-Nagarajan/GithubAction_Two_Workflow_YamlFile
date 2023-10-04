@@ -1,21 +1,25 @@
 name: Workflow 2
 
 on:
-  push: 
-    branches: 
-      - master
-  pull_request:
-    branches:
-      - master
+  workflow_run:
+    workflows: ["Workflow 1"]
+    types:
+      - completed
 
 jobs:
-  Test:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+      - name: Conditional Step
+        id: conditional
+        run: echo "Workflow 2 Started"
 
-      - name: Workflow 2
+      - name: Check Workflow 1 Result
         run: |
-          echo "Workflow 2 Successfullt"
+          if [[ "${{ github.event.workflow_run.conclusion }}" == "success" ]]; then
+            echo "Workflow 1 succeeded; Workflow 2 continues..."
+          else
+            echo "Workflow 1 failed; Workflow 2 stops."
+            exit 1
+          fi
