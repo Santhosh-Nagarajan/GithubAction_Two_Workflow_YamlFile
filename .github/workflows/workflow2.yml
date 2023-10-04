@@ -1,13 +1,19 @@
-name: Checkov and Terraform
+name: Workfow File Two
+
+# on:
+#   push:
+#     branches:
+#       - master
 
 on:
-  push:
-    branches:
-      - master
-
+  workflow_run:
+    workflows: ["Workflow 1"]
+    types:
+      - completed
 
 jobs:
   build:
+    if: github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
