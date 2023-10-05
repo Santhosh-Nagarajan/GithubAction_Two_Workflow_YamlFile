@@ -27,4 +27,4 @@ jobs:
       - name: Docker Image Pull
         run: |
            docker login -u ${{secrets.DOCKERHUB_USERNAME}} -p ${{secrets.DOCKERHUB_TOKEN}}
-           docker pull ${{ secrets.DOCKERHUB_USERNAME }}/nginx:${{ github.event.workflow_run.workflow_run_id }}
+           docker pull ${{ secrets.DOCKERHUB_USERNAME }}/nginx:${{ github.event.workflow_run.number }}
