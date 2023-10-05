@@ -1,21 +1,28 @@
-name: Workflow 1
+name: Build and Push Docker Image to Dockerhub
 
 on:
   push:
     branches:
       - master
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
+env:
+    DOCKER_BUILD_VERSION: ${{ github.run_number }}
 
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-
-      - name: terraform
-        run: terraform
-
-      - name: Workflow1
+      - name: Login to Docker Hub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Build Docker image
+        
         run: |
-          echo "Workflow 1 Successfully"
+          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/nginx:${{ github.run_number }} .
+      - name: Push Docker image
+        run: |
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/nginx:${{ github.run_number }}         
