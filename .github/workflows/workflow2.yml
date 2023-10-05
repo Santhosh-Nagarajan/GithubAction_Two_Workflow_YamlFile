@@ -27,4 +27,4 @@ jobs:
       - name: Docker Image Pull
         run: |
            docker login -u ${{secrets.DOCKERHUB_USERNAME}} -p ${{secrets.DOCKERHUB_TOKEN}}
-           docker pull nginx:${{ github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.workflow == 'workflow1.yml' ? github.event.workflow_run.head_commit.id : 'latest' }}
+           docker pull nginx:${{ github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.workflow == 'Build and Push Docker Image to Dockerhub' ? github.event.workflow_run.head_commit.id : 'latest' }}
