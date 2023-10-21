@@ -26,3 +26,6 @@ jobs:
         run: |
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/nginx:${DOCKER_BUILD_VERSION}
       
+      - name: Set output for Workflow 2
+        id: set-output
+        run: echo "::set-output name=DOCKER_BUILD_VERSION::${DOCKER_BUILD_VERSION}"
