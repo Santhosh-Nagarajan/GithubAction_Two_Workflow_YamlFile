@@ -17,9 +17,9 @@ jobs:
 
       - name: Docker pull Image
         run: |
-          docker pull ${{ secrets.DOCKERHUB_USERNAME }}/nginx:${DOCKER_BUILD_VERSION}
-
+          docker login -u ${{secrets.DOCKERHUB_USERNAME}} -p ${{secrets.DOCKERHUB_TOKEN}}
+          docker pull ${{ secrets.DOCKERHUB_USERNAME }}/nginx:${{ github.event.workflow_run.DOCKER_BUILD_VERSION }}
       - name: Run Docker Container
         run: |
-          docker run -d -p 8080:80 ${{ secrets.DOCKERHUB_USERNAME }}/nginx:${DOCKER_BUILD_VERSION} 
+          docker run -d -p 8080:80 ${{ secrets.DOCKERHUB_USERNAME }}/nginx:${{ github.event.workflow_run.DOCKER_BUILD_VERSION }} 
           
