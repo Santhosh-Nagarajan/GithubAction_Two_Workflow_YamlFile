@@ -1,15 +1,13 @@
-# File: pull_image_and_run_workflow.yml
-
-name: Pull and Run Docker Image
+name: Workflow 2
 
 on:
   workflow_run:
-    workflows: ["Push Docker Image to Dockerhub"]
+    workflows: ["Build and Push Docker Image to Dockerhub"]
     types:
       - completed
 
 jobs:
-  pull-and-run-image:
+  build:
     runs-on: ubuntu-latest
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
@@ -17,11 +15,8 @@ jobs:
         id: conditional
         run: echo "Workflow 2 Started"
 
+      
       - name: Docker Image Pull
         run: |
-          docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
-          docker pull ${{ secrets.DOCKERHUB_USERNAME }}/nginx:${DOCKER_BUILD_VERSION}
-      
-      - name: Run Docker Container
-        run: |
-          docker run -d -p 80:80 ${{ secrets.DOCKERHUB_USERNAME }}/nginx:${DOCKER_BUILD_VERSION}
+           docker login -u ${{secrets.DOCKERHUB_USERNAME}} -p ${{secrets.DOCKERHUB_TOKEN}}
+           
