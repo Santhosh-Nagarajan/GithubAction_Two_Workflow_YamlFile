@@ -16,5 +16,10 @@ jobs:
         run: echo "Workflow 2 Started"
 
       - name: Docker pull Image
-        run: | 
-         docker login 
+        run: |
+          docker pull ${{ secrets.DOCKERHUB_USERNAME }}/nginx:${DOCKER_BUILD_VERSION}
+
+      - name: Run Docker Container
+        run: |
+          docker run -d -p 8080:80 ${{ secrets.DOCKERHUB_USERNAME }}/nginx:${DOCKER_BUILD_VERSION} 
+          
