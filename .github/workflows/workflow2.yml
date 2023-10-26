@@ -16,9 +16,6 @@ jobs:
         run: echo "Workflow 2 Started"
 
       - name: Docker Pull Image
-        run: |
+        run: |     
           # Pull the Docker image using the DOCKER_BUILD_VERSION from the triggering workflow
           docker pull ${{ secrets.DOCKERHUB_USERNAME }}/nginx:${{ github.event.workflow_run.workflow.jobs.build-and-push.outputs.DOCKER_BUILD_VERSION }}
-          
-          # Run the Docker container
-          docker run -d -p 80:80 ${{ secrets.DOCKERHUB_USERNAME }}/nginx:${{ github.event.workflow_run.workflow.jobs.build-and-push.outputs.DOCKER_BUILD_VERSION }}
