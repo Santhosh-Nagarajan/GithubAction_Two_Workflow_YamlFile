@@ -18,4 +18,4 @@ jobs:
       - name: Docker Pull Image
         run: |     
           # Pull the Docker image using the DOCKER_BUILD_VERSION from the triggering workflow
-          docker pull ${{ secrets.DOCKERHUB_USERNAME }}/nginx:${{ github.event.workflow_run.workflow.jobs.build-and-push.outputs.DOCKER_BUILD_VERSION }}
+          docker pull ${{ secrets.DOCKERHUB_USERNAME}}/nginx:${{ github.event.workflow_run.workflow.jobs.build-and-push.outputs.DOCKER_BUILD_VERSION }}
