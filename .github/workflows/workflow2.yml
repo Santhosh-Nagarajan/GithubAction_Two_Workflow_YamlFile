@@ -7,7 +7,7 @@ on:
       - completed
 
 jobs:
-  build:
+  run-container:
     runs-on: ubuntu-latest
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
@@ -15,6 +15,10 @@ jobs:
         id: conditional
         run: echo "Workflow 2 Started"
 
-      - name: Docker pull Image
+      - name: Docker Pull Image
         run: |
-          docker login -u ${{secrets.DOCKERHUB_USERNAME}} -p ${{secrets.DOCKERHUB_TOKEN}}
+          # Pull the Docker image using the DOCKER_BUILD_VERSION from the triggering workflow
+          docker pull ${{ secrets.DOCKERHUB_USERNAME }}/nginx:${{ github.event.workflow_run.workflow.jobs.build-and-push.outputs.DOCKER_BUILD_VERSION }}
+          
+          # Run the Docker container
+          docker run -d -p 80:80 ${{ secrets.DOCKERHUB_USERNAME }}/nginx:${{ github.event.workflow_run.workflow.jobs.build-and-push.outputs.DOCKER_BUILD_VERSION }}
