@@ -17,6 +17,7 @@ jobs:
 
       - name: Docker Pull Image
         run: |  
-          docker pull santhoshsp/nginx:latest
-          docker run -d -p 80:80 santhoshsp/nginx:latest
+          docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
+          docker pull ${{ secrets.DOCKERHUB_USERNAME }}/nginx:latest
+          docker run -d -p 80:80 ${{ secrets.DOCKERHUB_USERNAME }}/nginx:latest
         
