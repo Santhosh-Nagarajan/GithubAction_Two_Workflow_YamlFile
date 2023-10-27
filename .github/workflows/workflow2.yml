@@ -16,5 +16,5 @@ jobs:
         run: echo "Workflow 2 Started"
       - name: docker image pull
         run: |
-          echo "${{ needs.build-and-push.outputs.DOCKER_BUILD_VERSION }}"
+          echo "${{ github.event.workflow_run.conclusion }}"
         
