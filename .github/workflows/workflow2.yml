@@ -14,6 +14,7 @@ jobs:
       - name: Conditional Step
         id: conditional
         run: echo "Workflow 2 Started"
-      - name: docker image pull
+      - name: Pull Docker Image
         run: |
+          docker pull ${{ secrets.DOCKERHUB_USERNAME}}/nginx:${DOCKER_BUILD_VERSION}
         
