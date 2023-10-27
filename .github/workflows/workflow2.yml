@@ -18,5 +18,5 @@ jobs:
       - name: Docker Pull Image
         run: |  
           docker pull ${{ secrets.DOCKERHUB_USERNAME}}/nginx:${{ needs.build-and-push.outputs.DOCKER_BUILD_VERSION }}
-          docker run -d -p 80:80 ${{ secrets.DOCKERHUB_USERNAME}}/nginx:${{ needs.build-and-push.outputs.DOCKER_BUILD
+          docker run -d -p 80:80 ${{ secrets.DOCKERHUB_USERNAME}}/nginx:${{ needs.build-and-push.outputs.DOCKER_BUILD }}
         
