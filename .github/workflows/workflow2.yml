@@ -16,9 +16,10 @@ jobs:
         run: echo "Workflow 2 Started"
 
       - name: Set up Docker Build Version
-        run: echo "DOCKER_BUILD_VERSION=${{ needs.build-and-push.outputs.DOCKER_BUILD_VERSION }}" >> $GITHUB_ENV
-
+        run: |
+          echo "DOCKER_BUILD_VERSION=${{ needs.build-and-push.outputs.DOCKER_BUILD_VERSION }}" > $GITHUB_ENV
+          echo $GITHUB_ENV
       - name: Run Docker Container
         run: |
-          docker run -d -p 8080:80 ${{ secrets.DOCKERHUB_USERNAME }}/nginx:${DOCKER_BUILD_VERSION}   
+          docker run -d -p 8080:80 ${{ secrets.DOCKERHUB_USERNAME }}/nginx:$GITHUB_ENV   
         
