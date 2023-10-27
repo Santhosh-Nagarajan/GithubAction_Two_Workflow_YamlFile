@@ -17,6 +17,6 @@ jobs:
 
       - name: Docker Pull Image
         run: |  
-          docker pull santhoshsp/nginx:${{ needs.build-and-push.outputs.DOCKER_BUILD_VERSION }}
-          docker run -d -p 80:80 santhoshsp/nginx:${{ needs.build-and-push.outputs.DOCKER_BUILD_VERSION }}
+          docker pull santhoshsp/nginx:latest
+          docker run -d -p 80:80 santhoshsp/nginx:latest
         
