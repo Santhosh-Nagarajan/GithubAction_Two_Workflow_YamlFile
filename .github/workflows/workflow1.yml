@@ -28,3 +28,7 @@ jobs:
       - name: Push Docker image
         run: |
           docker push ${{ secrets.DOCKERHUB_USERNAME}}/nginx:${DOCKER_BUILD_VERSION}
+      
+      - name: Set Docker Image Tag
+        id: set-image-tag
+        run: echo "::set-output name=docker_image_tag::${{ secrets.DOCKERHUB_USERNAME}}/nginx:${DOCKER_BUILD_VERSION}"
